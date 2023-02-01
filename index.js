@@ -86,3 +86,54 @@ var finances = [
   ['Jan-2017', 138230],
   ['Feb-2017', 671099],
 ];
+
+
+//Total number of months included in the dataset
+let totalmonths = finances.length;
+// console.log("Total months: " + totalmonths)
+
+// The net total amount of Profit/Losses over the entire period:
+
+let totalamountrow = 0; 
+let totalnet = 0;
+let difference = 0;
+let empty_array = [];
+
+
+
+for(let i = 0; i < totalmonths; i++){             // i is the row, j = coloumn
+  for(let j = 0; j < finances[i].length; j++){   // the for loop allows the row and column to become all rows to allow the addition
+  
+    if(typeof finances[i][j] !== "string"){      // The if statment with the typeof allows the addition to happen whilst excluding the months
+      totalamountrow = totalamountrow + finances[i][j]; // Sum of each profit/loss for each date starting from 0 - declared above
+      difference = finances[i][j] - totalnet     
+      totalnet = finances[i][j];
+      empty_array.push(difference);  // the difference has been pushed into an array so that it can be used later to calculate the total changes
+      
+    }
+    
+  }
+}
+
+// The average of changes
+let sumofchange = 0;
+
+for(let i = 0; i < empty_array.length; i++){
+  sumofchange = sumofchange + empty_array[i];
+  
+}
+// console.log(sumofchange);
+
+avgchanges = Math.round(sumofchange/(totalmonths-1));
+// console.log(avgchanges);
+
+// Greatest increase/decrease - I wasn't too sure on how to do it! 
+
+
+
+// Financial Analysis
+final = "Financial Analysis" + "\n" + "--------------" + "\n" + "Total Months: " + totalmonths + 
+"\n" + "Total: $" + totalamountrow + "\n" + "Average Change: $" + avgchanges + "\n";
+
+console.log(final);
+
